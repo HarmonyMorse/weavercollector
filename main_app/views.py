@@ -27,3 +27,6 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def weavers_index(request):
+    return render(request, 'weavers/index.html', {"weavers": weavers})
