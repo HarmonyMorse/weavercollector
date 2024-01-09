@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4>All Known Weavers</h4>
+<p></p>
+{% for w in weavers %}
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">
+        
+            {{ w.name }}</span>
+        <p><strong>Alias:</strong>
+            
+            {{ w.alias }}
+        </p>
+        <p><strong>Universe:</strong>
+            
+            {{ w.universe }}
+        </p>
+        <p>
+            <ul>
+                <li><strong>Enemies:</strong></li>
+                {% for e in w.enemies %}
+                <li>
+                    &#9702; {{ e }}
+                </li>
+                {% endfor %}
+            </ul>
+        </p>
+    </div>
+</div>
+{% endfor %}
+<hr>
+<footer>All Rights Reserved, &copy; 2024 Weaver Collector</footer>
+
+{% endblock %}
