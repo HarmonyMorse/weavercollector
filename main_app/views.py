@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-weaver_data = [
+weavers = [
     {
         "alias": "Spider-Man",
         "name": "Peter Parker",
@@ -22,3 +22,5 @@ weaver_data = [
 ]
 
 # Create your views here.
+def home(request):
+    return render(request, 'home.html', {'weavers': weavers})
