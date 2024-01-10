@@ -1,25 +1,5 @@
 from django.shortcuts import render
-
-weavers = [
-    {
-        "alias": "Spider-Man",
-        "name": "Peter Parker",
-        "universe": "Earth-616",
-        "enemies": ["Green Goblin", "Venom"],
-    },
-    {
-        "alias": "Spider-Woman",
-        "name": "Gwen Stacy",
-        "universe": "Earth-65",
-        "enemies": ["Daredevil", "Vulture"],
-    },
-    {
-        "alias": "Spider-Man",
-        "name": "Miles Morales",
-        "universe": "Earth-1610",
-        "enemies": ["Prowler", "Doctor Octopus"],
-    },
-]
+from .models import Weaver
 
 # Create your views here.
 def home(request):
@@ -29,4 +9,7 @@ def about(request):
     return render(request, 'about.html')
 
 def weavers_index(request):
+    weavers = Weaver.objects.all()
+    for w in weavers:
+        w.enemies = w.enemies.split(",")
     return render(request, 'weavers/index.html', {"weavers": weavers})
