@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4>Weaver Details</h4>
+
+<div class="card">
+    
+    <div class="card-content">
+        <span class="card-title">
+        
+            {{ w.name }}</span>
+        <p><strong>Alias:</strong>
+            
+            {{ w.alias }}
+        </p>
+        <p><strong>Universe:</strong>
+            
+            {{ w.universe }}
+        </p>
+        <p>
+        <ul>
+            <li><strong>Enemies:</strong></li>
+            {% for e in w.enemies %}
+            <li>
+                &#9702;
+                
+                {{ e }}
+            </li>
+            {% endfor %}
+        </ul>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

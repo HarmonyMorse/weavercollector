@@ -5,7 +5,8 @@
 <p></p>
 {% for w in weavers %}
 <div class="card">
-    <div class="card-content">
+    <a href="{% url 'detail' w.id%}">
+    <div class="card-content black-text">
         <span class="card-title">
         
             {{ w.name }}</span>

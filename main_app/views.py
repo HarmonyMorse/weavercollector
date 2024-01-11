@@ -13,3 +13,8 @@ def weavers_index(request):
     for w in weavers:
         w.enemies = w.enemies.split(",")
     return render(request, 'weavers/index.html', {"weavers": weavers})
+
+def weavers_detail(request, weaver_id):
+    w = Weaver.objects.get(id=weaver_id)
+    w.enemies = w.enemies.split(",")
+    return render(request, 'weavers/detail.html', {"w": w})
