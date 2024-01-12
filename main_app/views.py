@@ -1,7 +1,7 @@
 from django import forms
 from django.shortcuts import render
 from .models import Weaver
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 # Create your views here.
 def home(request):
@@ -30,3 +30,7 @@ class WeaverCreate(CreateView):
         form = super(WeaverCreate, self).get_form(form_class)
         form.fields['enemies'].widget = forms.TextInput(attrs={'placeholder': 'Seperated by commas'})
         return form
+
+class WeaverUpdate(UpdateView):
+    model = Weaver
+    fields = '__all__'
