@@ -7,4 +7,5 @@ urlpatterns = [
     path('weavers/', views.weavers_index, name='index'),
     path('weavers/<int:weaver_id>/', views.weavers_detail, name='detail'),
     path('weavers/create/', views.WeaverCreate.as_view(), name='weavers_create'),
+    path('weavers/<int:pk>/update/', views.WeaverUpdate.as_view(), name='weavers_update'),
 ]
