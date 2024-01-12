@@ -4,10 +4,10 @@
 <h4>All Known Weavers</h4>
 <p></p>
 {% for w in weavers %}
-<div class="card">
+<div class="card blue lighten-5">
     <a href="{% url 'detail' w.id%}">
     <div class="card-content black-text">
-        <span class="card-title">
+        <span class="card-title red-text text-accent-4">
         
             {{ w.name }}</span>
         <p><strong>Alias:</strong>
