@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- New if/else block -->
+{% if object %}
+<h1>Edit <span class="red-text text-accent-4">{{object.name}}</span></h1>
+{% else %}
 <h1>New Weaver</h1>
+{% endif %}
 
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
 <form action="" method="POST">
@@ -12,7 +17,7 @@
         <!-- Can do just `form` without being a table -->
         {{ form.as_table }}
     </table>
-    <input type="submit" value="Submit!" class="btn">
+    <input type="submit" value="Submit!" class="btn blue">
 </form>
 
 {% endblock %}
