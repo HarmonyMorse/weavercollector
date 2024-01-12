@@ -10,8 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
-
-<body>
+{% comment %} https://stackoverflow.com/questions/36679649/how-to-add-a-color-overlay-to-a-background-image {% endcomment %}
+<body style="background-image: url('https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/marvel-spiderman-icon-graphic-teo-sewa.jpg');
+            background-repeat: repeat;
+            background-position: top left;
+            background-size: 79px 90px;
+            box-shadow: inset 2000px 0 0 0 rgba(255, 255, 255, 0.5);
+            ">
     <header class="navbar-fixed">
         <nav>
             <div class="nav-wrapper red accent-4">
