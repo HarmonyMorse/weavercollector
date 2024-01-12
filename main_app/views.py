@@ -1,7 +1,7 @@
 from django import forms
 from django.shortcuts import render
 from .models import Weaver
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 def home(request):
@@ -34,3 +34,7 @@ class WeaverCreate(CreateView):
 class WeaverUpdate(UpdateView):
     model = Weaver
     fields = '__all__'
+
+class WeaverDelete(DeleteView):
+    model = Weaver
+    success_url = '/weavers'
