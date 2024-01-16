@@ -15,4 +15,6 @@ urlpatterns = [
     path('powers/create/', views.PowerCreate.as_view(), name='powers_create'),
     path('powers/<int:pk>/update/', views.PowerUpdate.as_view(), name='powers_update'),
     path('powers/<int:pk>/delete/', views.PowerDelete.as_view(), name='powers_delete'),
+    path('weavers/<int:weaver_id>/assoc_power/<int:power_id>/', views.assoc_power, name='assoc_power'),
+    path('weavers/<int:weaver_id>/unassoc_power/<int:power_id>/', views.unassoc_power, name='unassoc_power'),
 ]
