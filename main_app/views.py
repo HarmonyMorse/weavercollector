@@ -1,4 +1,5 @@
 from django import forms
+from .forms import SightingForm
 from django.shortcuts import render
 from .models import Weaver
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -19,7 +20,11 @@ def weavers_index(request):
 def weavers_detail(request, weaver_id):
     w = Weaver.objects.get(id=weaver_id)
     w.enemies = w.enemies.split(",")
-    return render(request, 'weavers/detail.html', {"w": w})
+    sighting_form = SightingForm()
+    return render(request, 'weavers/detail.html', {
+        "w": w,
+        'sighting_form': sighting_form
+        })
 
 class WeaverCreate(CreateView):
     model = Weaver
