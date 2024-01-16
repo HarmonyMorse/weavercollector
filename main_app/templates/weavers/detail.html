@@ -39,6 +39,15 @@
         </div>
     </div>
     <div class="col s6">
+        <form action="{% url 'add_sighting' w.id %}" method="POST" style="background-color:rgba(197, 232, 255, 0.8);border-radius:.6em;padding: .1em 1em .2em 1em;">
+            {% csrf_token %}
+            {{ sighting_form.as_p }}
+            <br>&nbsp;
+            &nbsp;
+            &nbsp;
+            <input type="submit" class="btn" value="Add Sighting">
+            <br>&nbsp;
+        </form>
         <table class="striped">
             <thead>
                 <tr>
@@ -47,8 +56,8 @@
                 </tr>
             </thead>
             <tbody>
-                {% if w.sightings %}
-                    {% for s in w.sightings %}
+                {% if w.sighting_set %}
+                    {% for s in w.sighting_set.all %}
                     <tr>
                         <td>{{ s.date }}</td>
                         <td>{{ s.location }}</td>
@@ -62,4 +71,12 @@
         </table>
     </div>
 </div>
+
+<script>
+    const dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd'
+    });
+</script>
+
 {% endblock %}
