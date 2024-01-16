@@ -24,10 +24,18 @@ def weavers_index(request):
 
 def weavers_detail(request, weaver_id):
     w = Weaver.objects.get(id=weaver_id)
+    id_list = w.powers.all().values_list("id")
+    powers_weaver_doesnt_have = Power.objects.exclude(id__in=id_list)
     w.enemies = w.enemies.split(",")
     sighting_form = SightingForm()
     return render(
-        request, "weavers/detail.html", {"w": w, "sighting_form": sighting_form}
+        request,
+        "weavers/detail.html",
+        {
+            "w": w,
+            "sighting_form": sighting_form,
+            "powers": powers_weaver_doesnt_have,
+        },
     )
 
 
@@ -42,7 +50,7 @@ def add_sighting(request, weaver_id):
 
 class WeaverCreate(CreateView):
     model = Weaver
-    fields = "__all__"
+    fields = ["name", "description", "enemies"]
 
     # https://stackoverflow.com/questions/52021136/is-it-possible-to-add-placeholder-in-generic-create-view-form
     def get_form(self, form_class=None):
@@ -85,3 +93,13 @@ class PowerUpdate(UpdateView):
 class PowerDelete(DeleteView):
     model = Power
     success_url = "/powers"
+
+
+def assoc_power(request, weaver_id, power_id):
+    Weaver.objects.get(id=weaver_id).powers.add(power_id)
+    return redirect("detail", weaver_id=weaver_id)
+
+
+def unassoc_power(request, weaver_id, power_id):
+    Weaver.objects.get(id=weaver_id).powers.remove(power_id)
+    return redirect("detail", weaver_id=weaver_id)
