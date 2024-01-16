@@ -3,37 +3,63 @@
 
 <h4>Weaver Details</h4>
 
-<div class="card blue lighten-4">
-    
-    <div class="card-content">
-        <span class="card-title red-text text-accent-4">
-        
-            {{ w.name }}</span>
-        <p><strong>Alias:</strong>
+<div class="row">
+    <div class="col s6">
+        <div class="card blue lighten-4">
             
-            {{ w.alias }}
-        </p>
-        <p><strong>Universe:</strong>
-            
-            {{ w.universe }}
-        </p>
-        <p>
-        <ul>
-            <li><strong>Enemies:</strong></li>
-            {% for e in w.enemies %}
-            <li>
-                &#9702;
+            <div class="card-content">
+                <span class="card-title red-text text-accent-4">
                 
-                {{ e }}
-            </li>
-            {% endfor %}
-        </ul>
-        </p>
+                    {{ w.name }}</span>
+                <p><strong>Alias:</strong>
+                    
+                    {{ w.alias }}
+                </p>
+                <p><strong>Universe:</strong>
+                    
+                    {{ w.universe }}
+                </p>
+                <p>
+                <ul>
+                    <li><strong>Enemies:</strong></li>
+                    {% for e in w.enemies %}
+                    <li>
+                        &#9702;
+                        
+                        {{ e }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                </p>
+                <div class="card-action">
+                    <a href="{% url 'weavers_update' w.id %}" class="blue-text">Edit</a>
+                    <a href="{% url 'weavers_delete' w.id %}" class="red-text text-accent-4">Delete</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-action">
-        <a href="{% url 'weavers_update' w.id %}" class="blue-text">Edit</a>
-        <a href="{% url 'weavers_delete' w.id %}" class="red-text text-accent-4">Delete</a>
+    <div class="col s6">
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if w.sightings %}
+                    {% for s in w.sightings %}
+                    <tr>
+                        <td>{{ s.date }}</td>
+                        <td>{{ s.location }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="2" class="blue lighten-4">No sightings yet</td>
+                {% endif %}
+            </tbody>
+        </table>
     </div>
 </div>
-
 {% endblock %}
