@@ -1,6 +1,6 @@
 from django import forms
 from .forms import SightingForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Weaver
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -25,6 +25,14 @@ def weavers_detail(request, weaver_id):
         "w": w,
         'sighting_form': sighting_form
         })
+
+def add_sighting(request, weaver_id):
+    form = SightingForm(request.POST)
+    if form.is_valid():
+        new_sighting = form.save(commit=False)
+        new_sighting.weaver_id = weaver_id
+        new_sighting.save()
+    return redirect('detail', weaver_id=weaver_id)
 
 class WeaverCreate(CreateView):
     model = Weaver
