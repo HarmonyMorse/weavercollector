@@ -14,3 +14,13 @@ class Weaver(models.Model):
 
     def get_absolute_url(self):
         return reverse("detail", kwargs={"weaver_id": self.id})
+
+
+class Sighting(models.Model):
+    date = models.DateField()
+    location = models.CharField(max_length=100)
+    
+    weaver = models.ForeignKey(Weaver, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.location} on {self.date}"
