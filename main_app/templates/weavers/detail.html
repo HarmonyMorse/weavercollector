@@ -41,6 +41,7 @@
     <div class="col s6">
         <form action="{% url 'add_sighting' w.id %}" method="POST" style="background-color:rgba(197, 232, 255, 0.8);border-radius:.6em;padding: .1em 1em .2em 1em;">
             {% csrf_token %}
+            
             {{ sighting_form.as_p }}
             <br>&nbsp;
             &nbsp;
@@ -57,18 +58,85 @@
             </thead>
             <tbody>
                 {% if w.sighting_set %}
-                    {% for s in w.sighting_set.all %}
-                    <tr>
-                        <td>{{ s.date }}</td>
-                        <td>{{ s.location }}</td>
-                    </tr>
-                    {% endfor %}
+                {% for s in w.sighting_set.all %}
+                <tr>
+                    <td>
+                        
+                        {{ s.date }}
+                    </td>
+                    <td>
+                        
+                        {{ s.location }}
+                    </td>
+                </tr>
+                {% endfor %}
                 {% else %}
                 <tr>
                     <td colspan="2" class="blue lighten-4">No sightings yet</td>
-                {% endif %}
+                    {% endif %}
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- This is all new markup to be added just above the <script> tag -->
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>
+            
+            {{ w.name }}'s Powers
+        </h3>
+        {% if w.powers.count %}
+        {% for p in w.powers.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                
+                    {{ p.name }}
+                </span>
+                Description:
+                
+                {{ p.description }}
+            </div>
+            <div class="card-action">
+                <form action="{% url 'unassoc_power' w.id p.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Remove</button>
+                </form>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h5>No Powers ☹️</h5>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Available toys will come after this line -->
+    <div class="col s6">
+        <h3>Possible Powers</h3>
+        {% if powers.count %}
+        {% for power in powers.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                
+                    {{ power.name }}
+                </span>
+                Description:
+                
+                {{ power.description }}
+            </div>
+            <div class="card-action">
+                <form action="{% url 'assoc_power' w.id power.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Add</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>{{w.name}} Already Has All Powers</h5>
+        {% endif %}
     </div>
 </div>
 
