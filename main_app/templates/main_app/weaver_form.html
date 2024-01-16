@@ -9,7 +9,7 @@
 {% endif %}
 
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
-<form action="" method="POST">
+<form action="" method="POST" style="background-color:rgba(197, 232, 255, 0.6);border-radius:.6em;">
     <!-- Required for (Django) security purpose -->
     {% csrf_token %}
     <table>
@@ -17,7 +17,12 @@
         <!-- Can do just `form` without being a table -->
         {{ form.as_table }}
     </table>
+    <br>&nbsp;
+    &nbsp;
+    &nbsp;
     <input type="submit" value="Submit!" class="btn blue">
+    <br>&nbsp;
 </form>
+<br>
 
 {% endblock %}
